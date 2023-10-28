@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% block contents %}
+    <div class="text-end ">
+    <br>
+    {% if request.user.is_authenticated %}
+    {% if  request.path  == "/astronomers/faved/" %}
+            <a href="http://127.0.0.1:8000//astronomers/default/" class="btn btn-primary" role="button"><h3>Show all elements</h3></a>
+    {% else %}
+        <a href="http://127.0.0.1:8000//astronomers/faved/" class="btn btn-primary ms-auto mt-auto" role="button"><h3>Show liked elements</h3></a>
+    {% endif %}
+    {% endif %}
+    </div>
+    <div class="table-responsive">
+    <table class="table align-middle" id="table">
+        <thead>
+        <tr>
+            <th scope="col" style="color: powderblue"><h3> Name</h3> </th>
+            <th scope="col" style="color: powderblue"><h3> Dates of live</h3> </th>
+            <th scope="col" style="color: powderblue; width: 25%"><h3> Discovered planets </h3></th>
+            {% if request.user.is_authenticated %}
+            <th scope="col" style="color: powderblue"></th>
+            {% endif %}
+        </tr>
+        </thead>
+    <tbody>
+    <tr>
+    {%for i in astrs%}
+        <td style="color: powderblue"> <h3>{{i.name}} ({{ i.abrName }})</h3></td>
+        {% if i.dateOfDeath == Null %} }}
+            <td style="color: powderblue"><h3> {{i.dateOfBirth}} -</h3></td>
+        {% else %}
+            <td style="color: powderblue"> <h3>{{i.dateOfBirth}} - {{ i.dateOfDeath }}</h3></td>
+        {% endif %}
+        <td id="carousel{{i.id}}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" >
+                {%for j in mp_list%}
+                 {% if j.discoverer == i%}
+
+                    <div class="carousel-item active">
+                        <div id = "cell">
+                            <div class="  d-flex justify-content-center">
+                                <i style="color: powderblue"><h2> {{ j.name }} </h2></i>
+                                {% if request.user.is_authenticated %}
+                                      <form action="{% url 'planet_fave' j.id %}" method="POST">
+                                        {% csrf_token %}
+                                        {% if request.user in j.fave.all%}
+                                        <button type = "submit" name="planet_id" value="{{j.id}}" class="btn btn-info d-flex justify-content-end" style="background-color: transparent; border: 0; ">
+                                            <img src="/static/images/star.png" width="30" height="30" alt="1">
+                                        </button>
+                                        {% else %}
+                                        <button type = "submit" name="planet_id" value="{{j.id}}" class="btn btn-info d-flex justify-content-end" style="background-color: transparent; border: 0;">
+                                            <img src="/static/images/star0.png" width="30" height="30" alt="1">
+                                        </button>
+                                        {% endif %}
+                                      </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                 {% endif %}
+                {% endfor %}
+            </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{i.id}}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon visually-hidden" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel{{i.id}}" data-bs-slide="next">
+            <span class="carousel-control-next-icon visually-hidden" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        </td>
+        <td></td>
+        {% if request.user.is_authenticated %}
+        <td>
+              <form action="{% url 'astronomers_fave' i.pk %}" method="POST" >
+                {% csrf_token %}
+                {% if request.user in i.fave.all%}
+                <button type = "submit" name="astronomer_id" value="{{i.id}}" class="btn btn-info" style="background-color: transparent; border: 0; ">
+                    <img src="/static/images/star.png" width="40" height="40" class = "mx-auto d-inline ">
+                </button>
+                {% else %}
+                <button type = "submit" name="astronomer_id" value="{{i.id}}" class="btn btn-info" style="background-color: transparent; border: 0;">
+                    <img src="/static/images/star0.png" width="40" height="40" class = "mx-auto d-inline ">
+                </button>
+                {% endif %}
+              </form>
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+
+    </tbody>
+    </table>
+    <br>
+    {% if mps.has_other_pages %}
+    <div class="btn-group" role="group" aria-label="Item pagination">
+        {% if mps.has_previous %}
+            <a href="?page={{ mps.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+        {% endif %}
+
+        {% for page_number in mps.paginator.page_range %}
+            {% if mps.number == page_number %}
+                <button class="btn btn-outline-primary active">
+                    <span>{{ page_number }} <span class="sr-only">(current)</span></span>
+                </button>
+            {% else %}
+                <a href="?page={{ page_number }}" class="btn btn-outline-primary">
+                    {{ page_number }}
+                </a>
+            {% endif %}
+        {% endfor %}
+        {% if mps.has_next %}
+            <a href="?page={{ mps.next_page_number }}" class="btn btn-outline-primary">&raquo;</a>
+        {% endif %}
+    </div>
+    {% endif %}
+    <br>
+
+
+        </div>
+
+    {% if astrs.has_other_pages %}
+    <div class="btn-group" role="group" aria-label="Item pagination" style="margin-left: 10px">
+        {% if mps.has_previous %}
+            <a href="?page={{ astrs.previous_page_number }}" class="btn btn-outline-primary" >&laquo;</a>
+        {% endif %}
+
+        {% for page_number in astrs.paginator.page_range %}
+            {% if astrs.number == page_number %}
+                <button class="btn btn-outline-primary active">
+                    <span>{{ page_number }} <span class="sr-only">(current)</span></span>
+                </button>
+            {% else %}
+                <a href="?page={{ page_number }}" class="btn btn-outline-primary">
+                    {{ page_number }}
+                </a>
+            {% endif %}
+        {% endfor %}
+        {% if astrs.has_next %}
+            <a href="?page={{ astrs.next_page_number }}" class="btn btn-outline-primary">&raquo;</a>
+        {% endif %}
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <footer id = cell style="background-color: rgba(230, 230, 255, 0.60); width: calc(10%) ">
+    <h2><a href="http://127.0.0.1:8000/input_info/">Your info</a></h2>
+    </footer>
+{% endblock %}

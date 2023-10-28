@@ -1,0 +1,35 @@
+            .background_col
+            {
+                height: 100%;
+                background: linear-gradient(to bottom, #6c67e9, #5ca779) no-repeat;
+            }
+            h3
+            {
+                padding-left: 40px;
+                background-color: rgba(255, 40, 30, 0.4);
+            }
+            #table {
+            width: calc(80% + 80px);
+            font-family: "Calisto MT", serif;
+            padding-bottom: 7px;
+            margin-left: 5px;
+            margin-right: 50px;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 1px 3px 1px #969494;
+            background: linear-gradient(to bottom, #882233, #667799) no-repeat;
+            border-color: floralwhite;
+            }
+            #info{
+                width: calc(90% + 100px);
+                padding-bottom: 7px;
+                margin-left: 10px;
+                margin-right: 20px;
+                border-left: 1px solid rgba(255, 255, 255, 0.3);
+                border-radius: 10px;
+                border-top: 1px solid rgba(255, 255, 255, 0.7);
+                box-shadow: 0 1px 3px 1px #969494;
+                background: linear-gradient(to bottom, #667799, #882233) no-repeat;
+                border-color: floralwhite;
+            }

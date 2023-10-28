@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+      <AnchorPane fx:id="placement1" layoutY="114.0" prefHeight="99.0" prefWidth="623.0" />
+      <Button fx:id="searchButton" layoutX="470.0" layoutY="25.0" mnemonicParsing="false" onAction="#serch" text="Button" AnchorPane.bottomAnchor="350.0" AnchorPane.leftAnchor="470.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="25.0" />
+      <TextField fx:id="searchBar" layoutX="111.0" layoutY="28.0" prefHeight="25.0" prefWidth="347.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="25.0" />
+      <Polygon fx:id="funTriangle" fill="#1440ff" layoutX="61.0" layoutY="60.0" points="-68.0, 24.0, 10.0, -47.0, 104.0, -60.0" stroke="BLACK" strokeType="INSIDE" />
+      <Line endX="511.0" endY="-57.0" layoutX="111.0" layoutY="171.0" startX="-111.0" startY="-57.0" />
+      <Line endX="465.50006103515625" endY="14.0" layoutX="155.0" layoutY="200.0" startX="-164.5" startY="14.0" />
+      <Line endX="504.2928466796875" endY="23.0" layoutX="115.0" layoutY="287.0" startX="-115.0" startY="23.0" />
+      <AnchorPane fx:id="placement2" layoutY="217.0" prefHeight="92.0" prefWidth="623.0" />
+      <AnchorPane fx:id="placement3" layoutY="308.0" prefHeight="92.0" prefWidth="623.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+    <div style = "margin-top: 10%;
+  width: calc(90% + 100px);
+  padding-bottom: 7px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 1px 3px 1px #969494;
+  background-image: linear-gradient(to right, rgba(51, 51, 136, 0.8), rgba(136, 136, 136, 0.8))" id = "cell">
+    <img src="{{ this_user.avatar(128) }}">
+    <ul>
+            <li><h1>User: {{ this_user.username }}</h1></li>
+            <li><h1>Joined at: {{ this_user.joined_at }}</h1></li>
+    </ul>
+    {% if current_user == this_user %}
+    {% endif %}
+</div>
+    <div class = "container">
+    {% for post in  posts %}
+            <div class="card col-lg-4 col-md-6 col-sm-12 col-xs-12"  style="width: 18rem">
+                <h3 class="card-title">{{post.Title}}</h3>
+                <h5 class="card-text">{{post.Content}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted"> {{post.time}}</h6>
+            </div>
+    {% endfor %}
+    </div>
+{% endblock %}

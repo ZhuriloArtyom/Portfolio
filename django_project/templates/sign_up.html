@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+ <div style="color: cornflowerblue">
+ <form method="post" id = "cell" style="width: calc(50%); margin-top: 10px">
+    <h2 style="width: 160px">Sign up</h2>
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        <h2>{{ field.label_tag }}</h2><br>
+        {{ field }}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+        <button type="submit" id = "cell" style="color: cornflowerblue; width: 160px; margin-right: 10px"><h3>Sign up</h3></button>
+  </form>
+</div>
+
+{% endblock %}

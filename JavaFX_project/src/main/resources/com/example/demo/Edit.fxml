@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+      <Button fx:id="flagBtn" layoutX="501.0" layoutY="175.0" mnemonicParsing="false" onAction="#changeFlag" text="New Flag" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="175.0" />
+      <ImageView fx:id="currentFlag" fitHeight="150.0" fitWidth="200.0" layoutX="380.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="14.0" />
+      <Label layoutX="53.0" layoutY="45.0" text="Names:" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="40.0" />
+      <Label layoutX="53.0" layoutY="117.0" text="Capital:" AnchorPane.topAnchor="110.0" />
+      <Label layoutX="53.0" layoutY="179.0" text="Largest city:" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="180.0" />
+      <Label layoutX="53.0" layoutY="246.0" text="Neighbours:" AnchorPane.topAnchor="250.0" />
+      <Label fx:id="currentNames" layoutX="134.0" layoutY="40.0" text="Label" />
+      <Label fx:id="CurrentCapital" layoutX="134.0" layoutY="110.0" text="Label" />
+      <Label fx:id="currentLC" layoutX="134.0" layoutY="180.0" text="Label" />
+      <Label fx:id="currentNeighbours" layoutX="134.0" layoutY="250.0" text="Label" />
+      <TextField fx:id="newName" layoutX="53.0" layoutY="64.0" />
+      <TextField fx:id="newCapital" layoutX="53.0" layoutY="139.0" />
+      <TextField fx:id="newLC" layoutX="53.0" layoutY="213.0" />
+      <TextField fx:id="newNeighbours" layoutX="53.0" layoutY="282.0" />
+      <Button fx:id="concludeBtn" layoutX="487.0" layoutY="282.0" mnemonicParsing="false" onAction="#conclude" text="Conclude" />
+   </children>
+</AnchorPane>

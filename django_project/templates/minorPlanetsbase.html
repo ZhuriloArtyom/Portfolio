@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block contents %}
+    <div class="text-end ">
+    <br>
+    {% if request.user.is_authenticated %}
+    {% if  request.path  == "/mp/faved/" %}
+            <a href="http://127.0.0.1:8000//mp/default/" class="btn btn-primary" role="button"><h3>Show all elements</h3></a>
+    {% else %}
+        <a href="http://127.0.0.1:8000//mp/faved/" class="btn btn-primary ms-auto mt-auto" role="button"><h3>Show liked elements</h3></a>
+    {% endif %}
+    {% endif %}
+    </div>
+    <div class="table-responsive">
+    <table class="table align-middle" id="table">
+        <thead>
+        <tr>
+            <th scope="col" style="color: powderblue; width: 33%"><h3> Name</h3> </th>
+            <th scope="col" style="color: powderblue; width: 33%"><h3> Discoverer</h3> </th>
+            <th scope="col" style="color: powderblue; width: 33%"><h3> Diameter(km)</h3></th>
+            {% if request.user.is_authenticated %}
+            <th scope="col" style="color: powderblue"></th>
+            {% endif %}
+        </tr>
+        </thead>
+    <tbody>
+    <tr>
+    {%for i in mps%}
+        <td style="color: powderblue"> <h3> {{i.name}} </h3></td>
+
+        <td style="color: powderblue"><span id="cell"  class="hovertext  d-flex align-items-end" data-hover= "{{i.discoverer}};   {{i.discoverer.dateOfBirth}} - {{i.discoverer.dateOfDeath}}">
+                <h2> {{i.discoverer.abrName}} </h2>
+
+            {% if request.user.is_authenticated %}
+              <form action="{% url 'astronomers_fave' i.discoverer.pk %}" method="POST" >
+                {% csrf_token %}
+              <br>
+
+                {% if request.user in i.discoverer.fave.all%}
+                <button type = "submit" name="astronomer_id" value="{{i.discoverer.id}}" class="btn btn-info" style="background-color: transparent; border: 0; ">
+                    <img src="/static/images/star.png" width="30" height="30" class = "mx-auto d-inline ">
+                </button>
+                {% else %}
+                <button type = "submit" name="astronomer_id" value="{{i.discoverer.id}}" class="btn btn-info" style="background-color: transparent; border: 0;">
+                    <img src="/static/images/star0.png" width="30" height="30" class = "mx-auto d-inline ">
+                </button>
+                {% endif %}
+            </form>
+        {% endif %}
+        </span></td>
+
+        <td style="color: powderblue"><h3 > {{i.diameter}} </h3></td>
+        {% if request.user.is_authenticated %}
+            <td>
+              <form action="{% url 'planet_fave' i.id %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in i.fave.all%}
+                <button type = "submit" name="planet_id" value="{{i.id}}" class="btn btn-info d-flex justify-content-end" style="background-color: transparent; border: 0; ">
+                    <img src="/static/images/star.png" width="40" height="40" alt="1">
+                </button>
+                {% else %}
+                <button type = "submit" name="planet_id" value="{{i.id}}" class="btn btn-info d-flex justify-content-end" style="background-color: transparent; border: 0;">
+                    <img src="/static/images/star0.png" width="40" height="40" alt="1">
+                </button>
+                {% endif %}
+              </form>
+            </td>
+        {% endif %}
+        </tr>
+    {% endfor%}
+    </tbody>
+    </table>
+
+    <br>
+    {% if mps.has_other_pages %}
+    <div class="btn-group" role="group" aria-label="Item pagination" style="margin-left: 10px">
+        {% if mps.has_previous %}
+            <a href="?page={{ mps.previous_page_number }}" class="btn btn-outline-primary">&laquo;</a>
+        {% endif %}
+
+        {% for page_number in mps.paginator.page_range %}
+            {% if mps.number == page_number %}
+                <button class="btn btn-outline-primary active">
+                    <span>{{ page_number }} <span class="sr-only">(current)</span></span>
+                </button>
+            {% else %}
+                <a href="?page={{ page_number }}" class="btn btn-outline-primary">
+                    {{ page_number }}
+                </a>
+            {% endif %}
+        {% endfor %}
+        {% if mps.has_next %}
+            <a href="?page={{ mps.next_page_number }}" class="btn btn-outline-primary">&raquo;</a>
+        {% endif %}
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <footer id = cell style="background-color: rgba(200, 200, 225, 0.85); width: calc(10%) ">
+    <h2><a href="http://127.0.0.1:8000/input_info/">Your info</a></h2>
+    </footer>
+{% endblock %}

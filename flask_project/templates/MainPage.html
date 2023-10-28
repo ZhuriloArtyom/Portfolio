@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block contents %}
+    <div class="container-xl" >
+    {% for post in  posts %}
+        {% if loop.index0 // 4 != (loop.index0 - 1) // 5 %}
+            <div class="row" style="margin-top: 5%">
+        {% endif %}
+        <div class="card col-lg-4 col-md-6 col-sm-12 col-xs-12 "  style="width: 18rem; margin-left: 1%; margin-right: 1%; margin-top: 1%">
+            <a class="row" href="/user/{{ post.poster.id }}">
+                <img class="col-2" src="{{ post.poster.avatar(48) }}">
+                <h6 class="col">{{post.poster.username}}</h6>
+            </a>
+            <h3 class="card-title">{{post.Title}}</h3>
+            <h5 class="card-text">{{post.Content}}</h5>
+            <div class="row">
+                <h6 class="card-subtitle col lg-2 text-muted"> {{post.time}}</h6>
+                <div class = col-md-auto>
+                {% if current_user.is_authenticated and current_user != post.poster %}
+                    {% if current_user.has_liked_post(post) %}
+                        <a style="margin-left: 30%; margin-bottom: 10px" class="col" href="{{ url_for('unlike', post_id=post.id, action='unlike') }}">
+                            <img src="/static/liked.png" width="30" height="30" alt="1">
+                        </a>
+                    {% else %}
+                        <a style="margin-left: 30%; margin-bottom: 10px" class="col" href="{{ url_for('like', post_id=post.id, action='like') }}">
+                            <img src="/static/unliked.png" width="30" height="30" alt="1">
+                        </a>
+                    {% endif %}
+                {%endif %}
+                </div>
+                <h4 class="col col-lg-2">{{ post.liked_by |length }}</h4>
+            </div>
+            {% if current_user.is_authenticated and current_user != post.poster%}
+                <a  href="{{ url_for('mail1', post_id=post.id, action='mail1') }}" >
+                    <img src="/static/mail.png" width="60" height="30" alt="1">
+                </a>
+            {% endif %}
+        </div>
+        {% if loop.index0 % 5  == 2  and loop.index0 > 2%}
+        </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+    {% if current_user.is_authenticated %}
+        <div style="margin-left: 50%;margin-top: 5%" class="container">
+            <a  href="/post" class="btn btn-info" role="button">New Post</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

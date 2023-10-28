@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.AddController">
+   <children>
+      <TextField fx:id="names" layoutX="57.0" layoutY="80.0" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="80.0" />
+      <TextField fx:id="capitals" layoutX="57.0" layoutY="144.0" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="140.0" />
+      <TextField fx:id="largestCity" layoutX="57.0" layoutY="200.0" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="200.0" />
+      <TextField fx:id="neighbours" layoutX="57.0" layoutY="262.0" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="260.0" />
+      <Button fx:id="flag" layoutX="455.0" layoutY="80.0" mnemonicParsing="false" onAction="#setFlag" text="Flag" AnchorPane.rightAnchor="93.0" AnchorPane.topAnchor="80.0" />
+      <Label layoutX="7.0" layoutY="51.0" prefHeight="17.0" prefWidth="248.0" text="Names(separated by ';' , official first):)" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="51.0" />
+      <Label layoutX="57.0" layoutY="115.0" text="Capitals(separated by ';'):" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="115.0" />
+      <Label layoutX="57.0" layoutY="177.0" text="The largest city:" AnchorPane.leftAnchor="7.0" />
+      <Label layoutX="57.0" layoutY="233.0" text="Neighbouring counties (sepated by ';'):" AnchorPane.leftAnchor="7.0" />
+      <Button fx:id="doneButton" layoutX="450.0" layoutY="315.0" mnemonicParsing="false" onAction="#done" prefHeight="49.0" prefWidth="83.0" text="Done" />
+   </children>
+</AnchorPane>
